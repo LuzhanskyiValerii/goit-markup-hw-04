@@ -160,8 +160,6 @@ body {
 }
 .contact-nav-icon {
         display: block;
-        width: 16px;
-        height: 16px;
         fill: currentColor;
 }
 
@@ -388,10 +386,7 @@ body {
         fill: var(--White);
         border-radius: 50%;
 }
-.social-icon {
-        width: 20px;
-        height: 20px;
-}
+
 
 /* ====================================/TEAM==================================== */
 
@@ -532,8 +527,6 @@ body {
 }
 
 .footer-social-icon {
-        width: 20px;
-        height: 20px;
         fill: var(--White);
 }
 
