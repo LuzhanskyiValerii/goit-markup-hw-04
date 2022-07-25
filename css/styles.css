@@ -273,14 +273,15 @@ body {
         color: var(--title-text-color);
 }
 .section .section-text {
-        /* width: 270px; */
         font-size: 14px;
         line-height: 1.71;
         letter-spacing: 0.03em;
 }
 .features-list-icon {
-        display: block;
-        padding: 25px 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 120px;
         background: #F5F4FA;
         border-radius: 4px;
         margin-bottom: 30px;
@@ -434,13 +435,13 @@ body {
 
 .footer-section {
         display: flex;
-        gap: 70px;
         align-items: baseline;
 }
 
 .footer-contact-section {
         display: flex;
         flex-direction: column;
+        margin-right: 70px;
 }
 
 .footer .logo {
@@ -500,7 +501,6 @@ body {
 .footer-join {
         display: flex;
         flex-direction: column;
-
 }
 
 .footer-social-menu {
