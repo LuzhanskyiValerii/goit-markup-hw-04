@@ -52,7 +52,9 @@ img {
         --accent-color :#2196F3;
         --White: #ffffff;
         --main-font-family: 'Roboto', sans-serif;
-        --main-fill-icon: #AFB1B8
+        --main-fill-icon: #AFB1B8;
+        --trans-dur: 250ms;
+        --trans-tim-func: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
@@ -103,21 +105,30 @@ body {
         line-height: 1.19;
         letter-spacing: 0.03em;
 }
-.nav-list {
-        padding-top: 32px;
-        padding-bottom: 32px;
-}
-
-.activ:active {
-        color: var(--accent-color);
-}
 
 .web {
         color: var(--accent-color);
 }
-
+.site-nav-item {
+        position: relative;
+        padding-top: 32px;
+        padding-bottom: 32px;
+}
 .site-nav-item:not(:last-child) {
         margin-right: 50px;
+}
+.site-nav-item .link.current {
+        color: var(--accent-color);
+}
+.site-nav-item .link.current::after {
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        content: '';
+        width: 100%;
+        height: 4px;
+        background-color: var(--accent-color);
+        border-radius: 2px;
 }
 
 .site-nav {
@@ -127,7 +138,10 @@ body {
         font-size: 14px;
         line-height: 1.14;
         letter-spacing: 0.02em;
-        
+
+        transition-property: color;
+        transition-duration: var(--trans-dur);
+        transition-timing-function: var(--trans-tim-func);
 }
 
 .site-nav:hover,
@@ -148,11 +162,16 @@ body {
         line-height: 1.14;
         letter-spacing: 0.02em;
         color: var(--main-text-color);
+
+        transition-property: color;
+        transition-duration: var(--trans-dur);
+        transition-timing-function: var(--trans-tim-func);
 }
 
 .contact-nav:hover,
 .contact-nav:focus {
         color: var(--accent-color);
+
 }
 .nav-item {
         padding-top: 32px;
@@ -220,6 +239,10 @@ body {
         cursor: pointer;
         background-color: var(--accent-color);
         color: var(--White);
+
+        transition-property: color, background-color;
+        transition-duration: var(--trans-dur);
+        transition-timing-function: var(--trans-tim-func);
 }
 
 .hero-button:hover,
@@ -239,6 +262,10 @@ body {
         cursor: pointer;
         background-color: #F5F4FA;
         color: var(--title-text-color);
+
+        transition-property: color, background-color;
+        transition-duration: var(--trans-dur);
+        transition-timing-function: var(--trans-tim-func);
 }
 
 .button:hover,
@@ -310,7 +337,28 @@ body {
         gap: 30px;
 }
 .work-list-card {
+        position: relative;
         flex-basis: calc((100% - 60px) / 3);
+}
+.modal {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 27px 82px;
+        background: rgba(47, 48, 58, 0.8);
+
+
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 16px;
+        text-align: center;
+        letter-spacing: 0.03em;
+        text-transform: uppercase;
+        
+        color: #FFFFFF;
 }
 
 /* ====================================/WORK==================================== */
@@ -380,12 +428,15 @@ body {
         border-radius: 50%;
         background-color: var(--White);
         fill: var(--main-fill-icon);
+
+        transition-property: fill, background-color;
+        transition-duration: var(--trans-dur);
+        transition-timing-function: var(--trans-tim-func);
 }
 .team-social-link:hover,
 .team-social-link:focus {
         background-color: var(--accent-color);
         fill: var(--White);
-        border-radius: 50%;
 }
 
 
@@ -417,6 +468,10 @@ body {
         border: 1px solid var(--main-fill-icon);
         border-radius: 3px;
         fill: var(--main-fill-icon);
+
+        transition-property: fill, border;
+        transition-duration: var(--trans-dur);
+        transition-timing-function: var(--trans-tim-func);
 }
 
 .client-link:hover,
@@ -478,6 +533,10 @@ body {
         line-height: 1.71;
         letter-spacing: 0.03em;
         color: rgba(255, 255, 255, 0.6);
+
+        transition-property: color;
+        transition-duration: var(--trans-dur);
+        transition-timing-function: var(--trans-tim-func);
 }
 .footer-contact:hover,
 .footer-contact:focus {
@@ -520,19 +579,86 @@ body {
         background: rgba(255, 255, 255, 0.1);
         border-radius: 50%;
 
+        transition-property: background-color;
+        transition-duration: var(--trans-dur);
+        transition-timing-function: var(--trans-tim-func);
+
 }
 .footer-social-link:hover,
 .footer-social-link:focus {
-        background: #2196F3;
+        background-color: #2196F3;
 }
 
 .footer-social-icon {
+        width: 20px;
+        height: 20px;
         fill: var(--White);
 }
 
 /*================== /JOIN ==================*/
 
 /* ====================================/FOOTER==================================== */
+
+/* ====================================MODAL WINDOW==================================== */
+
+.backdrop {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+
+        transition-property: visibility, opacity, transform;
+        transition-duration: var(--trans-dur);
+        transition-timing-function: var(--trans-tim-func);
+}
+
+.backdrop.is-hidden {
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(100%) scale(4);
+}
+
+.modal-window {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(1);
+        
+
+        width: 528px;
+        min-height: 581px;
+        background-color: var(--White);
+}
+
+.modal-close-btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        width: 30px;
+        height: 30px;
+        background-color: #FFFFFF;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 50%;
+
+        transition-property: fill;
+        transition-duration: var(--trans-dur);
+        transition-timing-function: var(--trans-tim-func);
+}
+.modal-close-btn:hover,
+.modal-close-btn:focus {
+        fill: var(--accent-color);
+}
+
+
+/* ====================================/MODAL WINDOW==================================== */
 
 /* ====================================PORTFOLIO==================================== */
 .portfolio {
@@ -557,13 +683,17 @@ body {
 
         border-radius: 4px;
         border: transparent;
+
+        transition-property: color var(--trans-dur) var(--trans-tim-func), bacground-color var(--trans-dur) var(--trans-tim-func), box-shadow var(--trans-dur) var(--trans-tim-func);
 }
 
 .portfolio-button:hover,
-.portfolio-button:focus{
+.portfolio-button:focus {
+        background-color: var(--accent-color);
+        color: var(--White);
         box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1),
-0px 1px 2px rgba(0, 0, 0, 0.08),
-0px 2px 2px rgba(0, 0, 0, 0.12);
+        0px 1px 2px rgba(0, 0, 0, 0.08),
+        0px 2px 2px rgba(0, 0, 0, 0.12);
 }
 
 .portfolio-list {
@@ -573,7 +703,12 @@ body {
         gap: 30px;
 }
 .portfolio-list-card {
+        position: relative;
         flex-basis: calc((100% - 60px) / 3);
+
+        transition-property: box-shadow;
+        transition-duration: var(--trans-dur);
+        transition-timing-function: var(--trans-tim-func);
 }
 .portfolio-list-card:hover,
 .portfolio-list-card:focus {
@@ -582,7 +717,43 @@ body {
         0px 1px 1px rgba(0, 0, 0, 0.12), 
         0px 4px 4px rgba(0, 0, 0, 0.06), 
         1px 4px 6px rgba(0, 0, 0, 0.16);
+        
 }
+.overlay {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        overflow: auto;
+        transform: translate(0, 100%);
+
+
+        font-style: normal;
+        font-family: 'Roboto';
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 28px;
+        letter-spacing: 0.03em;
+        
+        color: var(--White);
+        background-color: rgba(33, 150, 243, 0.9);
+        padding: 63px 24px;
+
+        transition-property: transform;
+        transition-duration: var(--trans-dur);
+        transition-timing-function: var(--trans-tim-func);
+}
+
+.portfolio-list-card:hover .overlay {
+        transform: translate(0, 0%);
+}
+
+
+.portfolio-list-card-wrapper {
+        position: relative;
+        overflow: hidden;
+}
+
+
 
 .portfolio-card {
         background: var(--White);
